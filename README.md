@@ -20,11 +20,11 @@ secret = defg-999-8888
 
 Until some clients are built out, just call methods directly. Currently you can use:
 
---- `sign(items)` --> compute md5 for request (internal, you probvably don't need this).
---- `assets()` --> get personal assets info.
---- `list_orders(currency)` --> list orders for specified currency (1 = BTC, 2 = fiat).
---- `order_info(currency, order_id)` --> get info about a specific order.
---- `order_cancel(currency, order_id)` --> cancel an order.
+- `sign(items)` : compute md5 for request (internal, you probvably don't need this).
+- `assets()` : get personal assets info.
+- `list_orders(currency)` : list orders for specified currency (1 = BTC, 2 = fiat).
+- `order_info(currency, order_id)` : get info about a specific order.
+- `order_cancel(currency, order_id)` : cancel an order.
 
 ```
 >>> from bitvc import BitVC
