@@ -10,7 +10,7 @@ Run `git clone https://github.com/extra/bitvc-python.git`
 Specify required settings in `config`
 
 ```
-api = https://api.bitvc.com/api/
+base = https://api.bitvc.com/api/
 
 key = abcd-123-456
 secret = defg-999-8888
