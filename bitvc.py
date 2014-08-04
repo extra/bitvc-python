@@ -35,13 +35,13 @@ class BitVC(object):
         returns:    tuple (md5 auth string, timestamp)
         """
         auth = md5.new()
-        auth.update("access_key="+self.cfg['key'])
+        auth.update("access_key="+self.cfg['key']+"&")
 
         timestamp = int(time.time())
         items["created"] = timestamp
 
         for key in sorted(items.iterkeys()):
-            auth.update(key+"="+str(items[key]))
+            auth.update(key+"="+str(items[key])+"&")
 
         auth.update("secret_key="+self.cfg['secret'])
         return (auth.hexdigest(), timestamp)
@@ -50,10 +50,10 @@ class BitVC(object):
         """
         get personal assets info
 
-        returns: json dict??
+        returns: json dict of balances
         """
         sign = self.sign({})
         params = {'access_key': self.cfg['key'], 'created': sign[1],
                 'sign': sign[0]}
         req = requests.post(self.cfg['base']+'accountInfo/get', data=params)
-        return req
+        return req.json()
