@@ -32,13 +32,28 @@ class BitVC(object):
 
         items:  dict of parameters to include in auth request
 
-        returns:    md5 auth string
+        returns:    tuple (md5 auth string, timestamp)
         """
         auth = md5.new()
         auth.update("access_key="+self.cfg['key'])
-        items["created"] = int(time.time())
+
+        timestamp = int(time.time())
+        items["created"] = timestamp
 
         for key in sorted(items.iterkeys()):
             auth.update(key+"="+items[key])
 
         auth.update("secret_key="+self.cfg['secret'])
+        return (auth.hexdigest(), timestamp)
+
+    def assets(self):
+        """
+        get personal assets info
+
+        returns: json dict??
+        """
+        sign = self.sign([])
+        data = {'access_key': self.cfg['key'], 'created': sign[1],
+                'sign': sign[0]}
+        req = requests.get(config_map('base')+'accountinfo/get', params=data)
+        req.json()

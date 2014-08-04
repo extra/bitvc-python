@@ -1,0 +1,5 @@
+[API]
+base = "https://api.bitvc.com/api/"
+
+key = "12345abcd"
+secret = "12345abcd"
