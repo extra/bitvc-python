@@ -24,7 +24,7 @@ def config_map(section):
 class BitVC(object):
     """make requests, return data, and stuff"""
     def __init__(self):
-        self.cfg = config_map('api')
+        self.cfg = config_map('API')
 
     def sign(self, items):
         """
@@ -41,7 +41,7 @@ class BitVC(object):
         items["created"] = timestamp
 
         for key in sorted(items.iterkeys()):
-            auth.update(key+"="+items[key])
+            auth.update(key+"="+str(items[key]))
 
         auth.update("secret_key="+self.cfg['secret'])
         return (auth.hexdigest(), timestamp)
@@ -52,8 +52,8 @@ class BitVC(object):
 
         returns: json dict??
         """
-        sign = self.sign([])
-        data = {'access_key': self.cfg['key'], 'created': sign[1],
+        sign = self.sign({})
+        params = {'access_key': self.cfg['key'], 'created': sign[1],
                 'sign': sign[0]}
-        req = requests.get(config_map('base')+'accountinfo/get', params=data)
-        req.json()
+        req = requests.post(self.cfg['base']+'accountInfo/get', data=params)
+        return req
