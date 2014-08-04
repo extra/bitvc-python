@@ -40,3 +40,7 @@ Until some clients are built out, just call methods directly. Currently you can 
     u'loan_cny': u'0.00',
     u'loan_ltc': u'0.0000'}
 ```
+
+###Contributing
+
+If you want to help, see if there are any issues that need to be completed.  Or add an issue if something needs to be fixed / improved.  Or make pull request and add a feature.
